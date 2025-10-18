@@ -31,7 +31,6 @@ public class WebDriverManager {
 	
 	//method for creating a driver in local or remote
 	public WebDriver createDriver() throws IOException {
-		Reporter.
 		if (getProperties().getProperty("execution_env").equalsIgnoreCase("remote")) {
 			DesiredCapabilities capabilities = new DesiredCapabilities();
 			// os
