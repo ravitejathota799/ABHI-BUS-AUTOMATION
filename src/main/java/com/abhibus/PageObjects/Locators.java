@@ -240,8 +240,9 @@ public class Locators extends BasePage {
                 Thread.sleep(10000);
                 int availableSeats = driver.findElements(By.xpath("//*[@id=\"seat-layout-details\"]/tbody/tr/td/div/button/span")).size();
                 System.out.println("AVAILABLE SEATS"+availableSeats);
-                System.out.println("available seats"+" "+availableSeat+"["+getRandomNumber(availableSeats)+"]");
-                driver.findElement(By.xpath(availableSeat+"["+getRandomNumber(availableSeats)+"]")).click();
+                int idx = getRandomNumber(availableSeats);
+                System.out.println("available seats"+" "+availableSeat+"["+idx+"]");
+                driver.findElement(By.xpath(availableSeat+"["+idx+"]")).click();
                 driver.findElement(By.xpath(boardingLocationsAndDroppingLocations)).click();
                 Thread.sleep(10000);
                 Thread.sleep(10000);

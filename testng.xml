@@ -2,7 +2,7 @@
 <suite name="Parallel Test Suite" parallel="tests">
     <test name="ChromeTest">
         <classes>
-            <class name="com.TestRunner.TestRunner"/>
+            <class name="com.TestRunner.TestRunner_TestNG"/>
         </classes>
     </test>
 
