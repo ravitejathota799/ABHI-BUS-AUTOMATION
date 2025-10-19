@@ -13,11 +13,16 @@ import java.util.Date;
 
 public abstract class Reporter {
 
-    ExtentSparkReporter spark;
+    static ExtentSparkReporter spark;
     public static ExtentTest test;
     public static ExtentReports extent;
     public static String ReportPath;
-    public String testCaseName, testDescription, Category, currentDateAndTime, module, Author;
+    public String testCaseName;
+    public String testDescription;
+    public String Category;
+    public static String currentDateAndTime;
+    public static String module;
+    public String Author;
     public static String dbhost, dbUID, dbPwd, encryptDbPwd, appEnv;
     public static int totalCaseCounter = 0, totalPass = 0, totalFail = 0, totalPassPercentage = 0;
 
@@ -25,11 +30,13 @@ public abstract class Reporter {
         try {
             if (status.equalsIgnoreCase("FAIL") || status.equalsIgnoreCase("PASS.WITHSNAP")) {
                 String snapNumber = "100001";
-                try {
-                    expAndErrorGetScreenshotAndText();
-                    snapNumber = takeBase64Snap();
-                } catch (Exception e) { e.printStackTrace(); }
-                desc = desc + test.addScreenCaptureFromBase64String(snapNumber);
+                test.fail(desc);
+                System.out.println("Failed : " + desc);
+//                try {
+//                    expAndErrorGetScreenshotAndText();
+//                    snapNumber = takeBase64Snap();
+//                } catch (Exception e) { e.printStackTrace(); }
+//                desc = desc + test.addScreenCaptureFromBase64String(snapNumber);
             }
 
             if (status.equalsIgnoreCase("PASS")) {
@@ -59,13 +66,13 @@ public abstract class Reporter {
     }
 
     public static String takeBase64Snap() {
-        return null;
+        return "";
     }
 
     public static void expAndErrorGetScreenshotAndText() throws InterruptedException {
     }
 
-    public ExtentReports startResult() {
+    public static ExtentReports startResult() {
         try {
             DateFormat dateFormat = new SimpleDateFormat("dd-MM-yy HH-mm-ss");
             Date today = Calendar.getInstance().getTime();
@@ -98,15 +105,15 @@ public abstract class Reporter {
     public static void reportStep(String desc, String status){
         reportStep(desc,status,true);
     }
-    public ExtentTest startTestCase(String testCaseName,String testCaseDescription){
+    public static  ExtentTest startTestCase(String testCaseName,String testCaseDescription){
         totalCaseCounter +=1;
         System.out.println("Script Executed: "+ totalCaseCounter);
         test = extent.createTest(testCaseName,testCaseDescription);
-        test.assignCategory(module);
+//        test.assignCategory(module);
         test.assignAuthor("Ravi Teja");
         return test;
     }
-    public void endResult() throws FileNotFoundException, IOException {
+    public static void endResult() throws FileNotFoundException, IOException {
         extent.flush();
     }
 }
