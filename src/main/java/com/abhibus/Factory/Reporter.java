@@ -110,7 +110,7 @@ public abstract class Reporter {
         System.out.println("Script Executed: "+ totalCaseCounter);
         test = extent.createTest(testCaseName,testCaseDescription);
 //        test.assignCategory(module);
-        test.assignAuthor("Ravi Teja");
+        test.assignAuthor("Ravi");
         return test;
     }
     public static void endResult() throws FileNotFoundException, IOException {

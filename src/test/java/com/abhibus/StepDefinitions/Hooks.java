@@ -3,14 +3,12 @@ package com.abhibus.StepDefinitions;
 import java.io.IOException;
 import java.util.Properties;
 
+import com.abhibus.Factory.GenericFunctions;
 import com.abhibus.Factory.Reporter;
 import io.cucumber.java.*;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
-import com.abhibus.Factory.WebDriverManager;
-public class Hooks extends  WebDriverManager{
+public class Hooks extends  GenericFunctions{
 	static WebDriver driver;
 	static Properties p;
 	@BeforeAll
@@ -21,8 +19,8 @@ public class Hooks extends  WebDriverManager{
 	@Before
 	public void startTest(Scenario scenario) throws IOException {
 		Reporter.startTestCase(scenario.getName(), scenario.getStatus().toString());
-		p = WebDriverManager.getProperties(); // calling the properties method
-		driver = WebDriverManager.getInstance().createDriver(); // calling the initializeBrowser
+		p = GenericFunctions.getProperties(); // calling the properties method
+		driver = GenericFunctions.getInstance().createDriver(); // calling the initializeBrowser
 
 	}
 
@@ -39,7 +37,7 @@ public class Hooks extends  WebDriverManager{
 
 	@AfterAll
 	public static void tearDownReport() throws IOException {
-		WebDriverManager.getInstance().quitDriver();
+		GenericFunctions.getInstance().closeAllBrowsers();
 		Reporter.endResult();
 	}
 }
